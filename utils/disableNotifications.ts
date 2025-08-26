@@ -20,8 +20,8 @@ export default async function disableNotifications() {
       },
     }
   );
-  const json = await res.json();
+  if (!res.ok) throw new Error((await res.json()).message);
+
   localStorage.removeItem("fcm-token");
   localStorage.removeItem("device-id");
-  if (!res.ok) throw new Error(json.message);
 }
